@@ -7,4 +7,10 @@ class MainController < ApplicationController
 
   def test
   end
+
+  def test2
+  end
+
+  def estate
+  end
 end

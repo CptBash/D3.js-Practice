@@ -1,7 +1,7 @@
 <h1 class="col-xs-12">Find Tourist Trends For a Two Week Period</h1>
 
 <!-- Google Map to eventually incorperate geocode and maps API -->
-<!-- <div id="mainContent">
+ <div id="mainContent">
   <div id="content">
       <div id="mainBody">
 
@@ -24,7 +24,7 @@
 
     </div>
   </div>
-</div> -->
+</div>
 
 
 <div id="chart"></div>
@@ -79,10 +79,10 @@ var formatDay = function(d) {
 }
 
 margin = {
-    top: 20,
-    right: 20,
+    top: 0,
+    right: 0,
     bottom: 20,
-    left: 45
+    left: 80
 };
 
 width = 800 - margin.left - margin.right;
@@ -98,7 +98,7 @@ var y = d3.scale.linear()
     .domain(d3.extent(data, function (d) {
     return d.y;
 }))
-    .range([height, 0]);
+    .range([height, 20]);
 
 var line = d3.svg.line()
     .interpolate("basis")
@@ -126,14 +126,6 @@ svg.append("svg:rect")
     .attr("height", height)
     .attr("class", "plot");
 
-var make_x_axis = function () {
-    return d3.svg.axis()
-        .scale(x)
-        .orient("bottom")
-        .tickFormat(formatDay)
-        .ticks(5);
-};
-
 var make_y_axis = function () {
     return d3.svg.axis()
         .scale(y)
@@ -141,15 +133,24 @@ var make_y_axis = function () {
         .ticks(5);
 };
 
+var make_x_axis = function () {
+    return d3.svg.axis()
+        .scale(x)
+        .orient("bottom")
+        .tickFormat(formatDay)
+        .ticks(12);
+};
+
 var xAxis = d3.svg.axis()
     .scale(x)
     .orient("bottom")
-    .ticks(5);
+    .tickFormat(formatDay)
+    .ticks(12);
 
 svg.append("svg:g")
     .attr("class", "x axis")
     .attr("transform", "translate(0, " + height + ")")
-    .call(xAxis );
+    .call(make_x_axis(formatDay) );
 
 var yAxis = d3.svg.axis()
     .scale(y)
@@ -167,11 +168,8 @@ svg.append("g")
     .text("Volume(mil)");
 
 svg.append("g")
-    .attr("class", "x grid")
+    .attr("class", "x grid");
 
-    .call(make_x_axis()
-    .tickSize(-height, 0, 0)
-    .tickFormat(formatDay));
 
 svg.append("g")
     .attr("class", "y grid")

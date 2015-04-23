@@ -1,4 +1,4 @@
-<h1 class="col-xs-offset-4">Hello, this is my D3 test area=3</h1>
+<h1 class="col-xs-offset-4">Hello, this is my 2nd D3 test area=3</h1>
   <div class="col-xs-12">
 
   </div>
@@ -6,28 +6,65 @@
 
 
 <script>
+  //DATA/DOMAIN
+  var dataArray = [5, 40, 50, 60]
+  var width = 500;
+  var height = 500;
+
+  //DEFINE GRAPH SCALE
+  var widthScale = d3.scale.linear()
+    .domain([0, 60])
+    .range([0, width]);
+
+  //DEFINE COLOR SCALE
+  var color = d3.scale.linear()
+    .domain([0, 60])
+    .range(["green", "blue"])
+
+  var axis = d3.svg.axis()
+      .ticks(5)
+      .scale(widthScale);
+
   var canvas = d3.select("body")
     .append("svg")
-    .attr("width", 500)
-    .attr("height", 500);
+    .attr("width", width)
+    .attr("height", height)
+    .append("g")
+    .attr("transform", "translate(20, 0)")
 
-    var circle = canvas.append("circle")
-        .attr("cx", 250)
-        .attr("cy", 250)
-        .attr("r", 50)
-        .attr("fill", "red");
 
-    var rect = canvas.append("rect")
-        .attr("width", 100)
-        .attr("height", 50);
+  var bars = canvas.selectAll("rect")
+          .data(dataArray)
+          .enter()
+            .append("rect")
+            .attr("width", function(d) { return widthScale(d); })
+            .attr("height", 50)
+            .attr("fill", function(d) {return color(d) })
+            .attr("y", function(d, i) { return i * 100 });
 
-    var line = canvas.append("line")
-        .attr("x1", 0)
-        .attr("y1", 100)
-        .attr("x2", 400)
-        .attr("y2", 400)
-        .attr("stroke", "green")
-        .attr("stroke-width", 10);  
 
-  console.log(d3);
+  canvas.append("g")
+      .attr("transform", "translate(0, 400)")
+      .call(axis);
+
+    //SIMPLE SHAPE DRAWING
+    // var circle = canvas.append("circle")
+    //     .attr("cx", 250)
+    //     .attr("cy", 250)
+    //     .attr("r", 50)
+    //     .attr("fill", "red");
+    //
+    // var rect = canvas.append("rect")
+    //     .attr("width", 100)
+    //     .attr("height", 50);
+    //
+    // var line = canvas.append("line")
+    //     .attr("x1", 0)
+    //     .attr("y1", 100)
+    //     .attr("x2", 400)
+    //     .attr("y2", 400)
+    //     .attr("stroke", "green")
+    //     .attr("stroke-width", 10);
+
+    //console.log(d3);
 </script>

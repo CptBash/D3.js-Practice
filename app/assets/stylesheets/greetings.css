@@ -1,3 +1,15 @@
+.map-dims{
+  width: 600px;
+  height: 300px!important;
+}
+.oocss .mas {
+  color: black!important;
+}
+
+.center{
+  margin-left: 30%;
+  margin-right: 30%;
+}
 
 .bg-settings{
   background-color: #FDFDFC;
@@ -116,7 +128,7 @@ body { margin: 0; padding: 0 }
 
   .footer {
     position: relative;
-    margin-top: -150px; /* negative value of footer height */
+    margin-top: -80px; /* negative value of footer height */
     height: 80px!important;
     clear:both;
     padding-top:20px;

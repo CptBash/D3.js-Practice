@@ -1,7 +1,12 @@
 Rails.application.routes.draw do
+
+  resources :locations
+
   get 'main/hello'
   get 'main/two_wk'
   get 'main/test'
+  get 'main/test2'
+  get 'main/estate'
   root 'main#hello'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
